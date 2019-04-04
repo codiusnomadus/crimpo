@@ -6,22 +6,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 
 @Document(collection = "products")
-@Data
 @Log4j2
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Product extends BaseModel {
+    @NotNull
     private String name;
 
+    @NotBlank
     private String productCode;
+
     private String description;
     private String terms;
 
@@ -42,16 +46,12 @@ public class Product extends BaseModel {
 
     private int tenureInMonths;
 
-    private Boolean isOnPostpaidTelcoPlan;
+    private Boolean forPostpaidPlan;
     private Boolean isExpiring;
 
     private Rules rules;
 
     private enum productStatus {ACTIVE, INACTIVE, PRE_LAUNCH}
-
-    public String getProductCode() {
-        return productCode;
-    }
 
     public Product addDevice(Device device) {
         device.setProduct(this);

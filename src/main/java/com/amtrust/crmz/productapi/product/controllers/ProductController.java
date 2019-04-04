@@ -7,10 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/products", produces = "application/json")
+@RequestMapping(value = "/products")
 public class ProductController {
 
     @Autowired
@@ -26,10 +27,16 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProduct(productCode));
     }
 
+    @GetMapping(value = "/hello-world")
+    public String hello() {
+        return "Hello World";
+    }
+
     @PostMapping(value = "/")
-    public ResponseEntity<Product> create(@RequestBody Product product) {
+    public ResponseEntity<Product> create(@Valid @RequestBody Product product) {
         productService.createProduct(product);
-        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{productCode}").buildAndExpand(product.getProductCode()).toUri()).body(product);
+        return null;
+                //ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{productCode}").buildAndExpand(product.getProductCode()).toUri()).body(product);
     }
 
 }
