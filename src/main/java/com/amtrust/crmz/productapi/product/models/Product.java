@@ -21,8 +21,10 @@ import java.util.Set;
 @Data
 public class Product extends BaseModel {
     @NotNull
+    @NotBlank
     private String name;
 
+    @NotNull
     @NotBlank
     private String productCode;
 
@@ -34,8 +36,7 @@ public class Product extends BaseModel {
     private Client client;
     private Insurer insurer;
 
-    private Set<Device> devices = new HashSet<>(); // should be an array
-
+    private Set<Device> devices = new HashSet<>();
     private String clientProductName;
     private String clientProductDescription;
     private Date startDateForSales;
@@ -54,7 +55,6 @@ public class Product extends BaseModel {
     private enum productStatus {ACTIVE, INACTIVE, PRE_LAUNCH}
 
     public Product addDevice(Device device) {
-        device.setProduct(this);
         this.devices.add(device);
         return this;
     }
