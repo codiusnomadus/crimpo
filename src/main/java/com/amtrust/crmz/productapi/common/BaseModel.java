@@ -1,6 +1,6 @@
 package com.amtrust.crmz.productapi.common;
 
-import com.amtrust.crmz.productapi.utils.ObjectIdSerializer;
+import com.amtrust.crmz.productapi.common.utils.ObjectIdSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import org.bson.types.ObjectId;
